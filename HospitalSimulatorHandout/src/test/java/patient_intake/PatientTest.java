@@ -135,6 +135,7 @@ public class PatientTest {
         assertEquals("P999", testPatient.getPatientID(), "Patient ID should be updated");
     }
     
+    @Test 
     void testPatientWithSingleName() {
         Patient patient = new Patient(
             "P002", "Madonna", "", 50, "Back pain", 2, "Waiting", "Room102", 10, "INS54321"
