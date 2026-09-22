@@ -35,7 +35,7 @@ public class EfficiencyTester {
      */
 
 
-    public Patient binarySearch(Patient[] patients, String pid, int targetIndex) {
+    public Patient binarySearch(Patient[] patients, String pid) {
         // TODO REQUIRED: Implement iterative binary search.
         // The array must be sorted by patientID before calling this method.
         int low = 0;
@@ -51,7 +51,7 @@ public class EfficiencyTester {
                 high = mid - 1; // Search in the lower end of the array
             }
         }
-        return null; // Patient not found so we will explode and return null.
+        return null; // Patient not found so we will explode(return null).
     }
 
     /**
@@ -70,6 +70,32 @@ public class EfficiencyTester {
     public Patient logNSearch(Patient[] patients, String pid) {
         // TODO OPTIONAL: Research and implement a second O(log n) algorithm.
         // Cite your source and explain the approach in a comment before the logic.
+        if (patients.length == 0) {
+            return null; // Return null if the array is empty.
+        }
+        if (patients[0].getPatientID().equals(pid)) {
+            return patients[0]; // Return the first patient if it matches the target.
+        }
+        int i = 1;
+
+        while (i < patients.length && patients[i].getPatientID().compareTo(pid) <= 0) {
+            i = i*2; // Exponentially increase the index to find the range.
+        }
+
+        int low = i / 2;
+        int high = Math.min(i, patients.length - 1);
+
+        while(low<=high){
+            int mid = low + (high - low) / 2;
+            int comparison = patients[mid].getPatientID().compareTo(pid);
+            if (comparison == 0) {
+                return patients[mid]; // Found the target patient
+            } else if (comparison < 0) {
+                low = mid + 1; // Search in the higher end of the array
+            } else {
+                high = mid - 1; // Search in the lower end of the array
+            }
+        }
         return null; // Remove this line and implement the method.
     }
 

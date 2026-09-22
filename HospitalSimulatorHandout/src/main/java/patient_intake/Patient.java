@@ -26,6 +26,10 @@ public class Patient extends Person {
         // TODO REQUIRED: Initialize the patient-specific fields.
     }
 
+    public Patient(String patientID2, String name, String chiefComplaint2, int triageLevel2) {
+        //TODO Auto-generated constructor stub
+    }
+
     // Getters
     public String getPatientID() {
         return patientID; // TODO REQUIRED: Return the patient ID.
