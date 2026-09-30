@@ -8,6 +8,7 @@ public class Patient extends Person {
     private String assignedRoom;
     private int arrivalHour;
     private String insuranceID;
+    // recommitting due to forgetting to push changes
 
     public Patient(String patientID, String firstName, String lastName, int age, 
                    String chiefComplaint, int triageLevel, String currentStage, 
