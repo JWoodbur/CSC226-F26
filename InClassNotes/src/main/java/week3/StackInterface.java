@@ -4,7 +4,7 @@ public interface StackInterface<T> {
     //places element at the top of the stack
     void push(T element);
     //removes element from the top of the stack
-    void pop();
+    void pop(T element);
     //returns element at the top of the stack
     T top();
     boolean isFull();
