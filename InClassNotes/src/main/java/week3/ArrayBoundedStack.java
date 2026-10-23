@@ -36,13 +36,10 @@ public class ArrayBoundedStack<T> implements StackInterface<T> {
     
     public void pop()
     {
-        if (isEmpty()){
-            throw new IllegalStateException("ts empty");
+        if (topIndex == -1){
+            System.out.println("Stack Underflow");
         }
-        T element = elements[topIndex];
-        elements[topIndex--] = null;
-        // How do we remove an element from the stack? Implement this method
-        
+        topIndex--;
     }
     
     public T top()
