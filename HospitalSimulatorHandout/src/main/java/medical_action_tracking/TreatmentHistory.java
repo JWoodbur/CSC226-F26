@@ -9,7 +9,7 @@ public class TreatmentHistory {
 
     public void addTreatment(String patientID, String treatment, String timestamp) {
         // This is a small worked example: create the record, then push it on the stack.
-        TreatmentRecord record = new TreatmentRecord(patientID, treatment, timestamp);
+        TreatmentRecord record = new TreatmentRecord(patientID, treatment, timestamp, null);
         allRecords.push(record);
     }
 
@@ -29,5 +29,15 @@ public class TreatmentHistory {
     public String displayHistory() {
         // TODO: Use the stack's top-to-bottom string representation.
         return allRecords.toString();
+    }
+
+    public void recordTreatment(TreatmentRecord record) {
+        // TODO Auto-generated method stub
+        allRecords.push(record);
+    }
+
+    public TreatmentRecord undoLastTreatment() {
+        // TODO Auto-generated method stub
+        return allRecords.pop();
     }
 }

@@ -4,11 +4,13 @@ public class TreatmentRecord {
     private String patientID;
     private String treatmentName;
     private String timestamp;
+    private String staffId;
 
-    public TreatmentRecord(String patientID, String treatmentName, String timestamp) {
+    public TreatmentRecord(String patientID, String treatmentName, String timestamp, String staffId) {
         this.patientID = patientID;
         this.treatmentName = treatmentName;
         this.timestamp = timestamp;
+        this.staffId = staffId;
     }
 
     public String getPatientID() {
@@ -25,10 +27,15 @@ public class TreatmentRecord {
         // TODO: Return the timestamp.
         return timestamp;
     }
+    
 
     @Override
     public String toString() {
         // TODO: Return "timestamp | patientID | treatmentName".
         return timestamp + " | " + patientID + " | " + treatmentName;
+    }
+
+    public String getStaffId() {
+        return staffId;
     }
 }

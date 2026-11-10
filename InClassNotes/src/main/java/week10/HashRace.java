@@ -19,6 +19,7 @@ package week10;
  *       (home slot occupied = 1 collision, then one more for each extra occupied slot you hit)
  *   - bucket: every insert whose bucket already has at least one node in it (count 1 per insert)
  */
+
 public class HashRace {
 
     public static final int PROGRESS_EVERY = 500;
@@ -43,8 +44,23 @@ public class HashRace {
      * @return long[]{ inserted, collisions }   e.g. new long[]{100000, 412345}
      */
     public static long[] linear(long[] keys, int tableSize, ProgressListener progress) {
-        // TODO
-        return null;
+        int[] table = new int[tableSize];
+        long inserted = 0;
+        long collisions = 0;
+
+        for (int i = 0; i < keys.length; i++) {
+            int index = (int) (keys[i] % tableSize);
+            if (table[index] != 0) {
+                collisions++;
+            }
+            table[index] = 1;
+            inserted++;
+            if (inserted % PROGRESS_EVERY == 0) {
+                progress.update(inserted, collisions);
+            }
+        }
+        progress.update(inserted, collisions);
+        return new long[]{inserted, collisions};
     }
 
     /**
@@ -57,8 +73,25 @@ public class HashRace {
      * @return long[]{ inserted, collisions }   e.g. new long[]{100000, 412345}
      */
     public static long[] quadratic(long[] keys, int tableSize, ProgressListener progress) {
-        // TODO
-        return null;
+        int[] table = new int[tableSize];
+        long inserted = 0;
+        long collisions = 0;
+
+        for (int i = 0; i < keys.length; i++) {
+            long index = keys[i] % tableSize;
+            long offset = 0;
+            while (table[(int) ((index + offset * offset) % tableSize)] != 0) {
+                collisions++;
+                offset++;
+            }
+            table[(int) ((index + offset * offset) % tableSize)] = 1;
+            inserted++;
+            if (inserted % PROGRESS_EVERY == 0) {
+                progress.update(inserted, collisions);
+            }
+        }
+        progress.update(inserted, collisions);
+        return new long[]{inserted, collisions};
     }
 
     /**
@@ -71,7 +104,22 @@ public class HashRace {
      * @return long[]{ inserted, collisions }   e.g. new long[]{100000, 99999}
      */
     public static long[] bucket(long[] keys, int tableSize, ProgressListener progress) {
-        // TODO
-        return null;
+        Node[] buckets = new Node[tableSize];
+        long inserted = 0;
+        long collisions = 0;
+
+        for (int i = 0; i < keys.length; i++) {
+            int index = (int) (keys[i] % tableSize);
+            if (buckets[index] != null) {
+                collisions++;
+            }
+            buckets[index] = new Node(keys[i], buckets[index]);
+            inserted++;
+            if (inserted % PROGRESS_EVERY == 0) {
+                progress.update(inserted, collisions);
+            }
+        }
+        progress.update(inserted, collisions);
+        return new long[]{inserted, collisions};
     }
 }
